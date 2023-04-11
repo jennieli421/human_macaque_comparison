@@ -1,4 +1,3 @@
 *.log
 slurm*
-ctl_fastq/*
 */*
