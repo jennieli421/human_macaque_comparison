@@ -40,6 +40,18 @@ Rscript /home/xil4009/scratch_tilgnerlab/scisorseq_scripts/map_and_filter.R
 
 echo "=========== Script terminated ==========="
 
+echo "Generating summary for MapAndFilter outputs" 
+cd /home/xil4009/scratch_tilgnerlab/scisorseq_scripts/mmalign/${sample}_mmalign/LRProcessingOutput
+echo "File Name    Number of Lines" > summary.txt 
+for file in mapping.bestperRead.bam mapping.bestperRead.RNAdirection.withConsensIntrons.transcriptWise.genes.gz CagePolyA.complete.mapping.bestperRead.RNAdirection.withConsensIntrons.transcriptWise.genes.gz newIsoforms_vs_Anno_ignoreAnno/CagePolyA.complete.stretches.gz newIsoforms_vs_Anno_ignoreAnno/exonStretches.gz; do 
+   if [[ "$file" == *.bam ]]; then 
+      echo "$file    $(samtools view -c $file)" >> summary.txt ; 
+   else 
+      echo "$file    $(zcat $file | wc -l)" >> summary.txt ; 
+   fi 
+done
+
+
 echo $SLURM_JOB_ID "Finished at:" `date` >> $log_name
 echo " " >> $log_name
 exit

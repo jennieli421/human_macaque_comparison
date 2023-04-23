@@ -30,9 +30,6 @@ sample=$1
 # cd into the directory with LRoutput
 cd /home/xil4009/scratch_tilgnerlab/scisorseq_scripts/mmalign/${sample}_mmalign
 
-log_name="infoPerLongRead.log"
-echo $sample $SLURM_JOB_ID >> $log_name
-echo $SLURM_JOB_ID "Starting at:" `date` >> $log_name
 
 # Run R script 
 Rscript /home/xil4009/scratch_tilgnerlab/scisorseq_scripts/info_per_long_read.R $sample
@@ -40,6 +37,4 @@ Rscript /home/xil4009/scratch_tilgnerlab/scisorseq_scripts/info_per_long_read.R 
 
 echo "=========== Script terminated ==========="
 
-echo $SLURM_JOB_ID "Finished at:" `date` >> $log_name
-echo " " >> $log_name
 exit
